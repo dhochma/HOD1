@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חד ייעוץ - שירותי כח אדם והשמה</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        .header {
+            background-color: #198754;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .nav {
+            background-color: #157347;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .nav a:hover {
+            background-color: #1e9e64;
+            transform: translateY(-2px);
+        }
+
+        .nav a.active {
+            background-color: #1e9e64;
+        }
+
+        .main-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 60vh;
+        }
+
+        /* Home Section Styles */
+        .home-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Services Section Styles */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        /* About Section Styles */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .about-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Contact Section Styles */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: #198754;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #157347;
+        }
+
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .section.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: #198754;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: white;
+            border-radius: 5px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .social-links a:hover {
+            background-color: #198754;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 10px;
+            }
+            
+            .nav a {
+                margin: 0 5px;
+                font-size: 14px;
+            }
+
+            .main-content {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>חד ייעוץ</h1>
+        <div class="subtitle">שירותי כח אדם והשמה</div>
+    </header>
+    
+    <nav class="nav">
+        <a href="#home" onclick="showSection('home', event)">דף הבית</a>
+        <a href="#services" onclick="showSection('services', event)">שירותים</a>
+        <a href="#about" onclick="showSection('about', event)">אודות</a>
+        <a href="#contact" onclick="showSection('contact', event)">צור קשר</a>
+    </nav>
+
+    <div class="main-content">
+        <div id="home" class="section">
+            <h2>ברוכים הבאים לחד ייעוץ</h2>
+            <p>אנחנו מתמחים במתן פתרונות מקצועיים בתחום כוח אדם והשמה</p>
+            
+            <div class="home-features">
+                <div class="feature-card">
+                    <h3>גיוס עובדים</h3>
+                    <p>איתור וגיוס עובדים מקצועיים בכל התחומים</p>
+                </div>
+                <div class="feature-card">
+                    <h3>ייעוץ ארגוני</h3>
+                    <p>ליווי וייעוץ מקצועי לארגונים בתחום משאבי אנוש</p>
+                </div>
+                <div class="feature-card">
+                    <h3>השמה</h3>
+                    <p>התאמה מדויקת בין מועמדים למשרות</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="services" class="section">
+            <h2>השירותים שלנו</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>גיוס עובדים</h3>
+                    <p>איתור והשמת עובדים מקצועיים</p>
+                </div>
+                <div class="service-card">
+                    <h3>ייעוץ ארגוני</h3>
+                    <p>שירותי ייעוץ למחלקות משאבי אנוש</p>
+                </div>
+                <div class="service-card">
+                    <h3>ליווי תעסוקתי</h3>
+                    <p>ליווי אישי למציאת עבודה מתאימה</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="about" class="section">
+            <h2>אודות חד ייעוץ</h2>
+            <p>חברת חד ייעוץ הוקמה מתוך חזון להוביל את תחום משאבי האנוש וההשמה בישראל</p>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>החזון שלנו</h3>
+                    <p>להיות החברה המובילה בתחום השמה וייעוץ משאבי אנוש, תוך שמירה על סטנדרטים גבוהים</p>
+                </div>
+                <div class="about-card">
+                    <h3>הניסיון שלנו</h3>
+                    <p>צוות המומחים שלנו מביא עמו שנים רבות של ניסיון בתחום משאבי האנוש</p>
+                </div>
+                <div class="about-card">
+                    <h3>היתרון שלנו</h3>
+                    <p>אנו מתגאים ביכולת שלנו להתאים בין המועמד המתאים ביותר למשרה המתאימה</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="contact" class="section">
+            <h2>צור קשר</h2>
+            <div class="contact-form">
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label for="name">שם מלא:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">דוא"ל:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">טלפון:</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">הודעה:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">שליחה</button>
+                </form>
+            </div>
+
+            <div class="social-links">
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#" target="_blank">Facebook</a>
+                <a href="#" target="_blank">WhatsApp</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function showSection(sectionId, event) {
+        if (event) {
+            event.preventDefault();
+        }
+        
+        // Update active nav link
+        const navLinks = document.querySelectorAll('.nav a');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + sectionId) {
+                link.classList.add('active');
+            }
+        });
+
+        // Hide all sections
+        const sections = document.getElementsByClassName('section');
+        for (let section of sections) {
+            if (section) {
+                section.style.opacity = '0';
+                setTimeout(() => {
+                    section.style.display = 'none';
+                    section.classList.remove('active');
+                }, 500);
+            }
+        }
+        
+        // Show the selected section
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            setTimeout(() => {
+                selectedSection.style.display = 'block';
+                selectedSection.classList.add('active');
+                setTimeout(() => {
+                    selectedSection.style.opacity = '1';
+                }, 50);
+            }, 500);
+        }
+
+        // Smooth scroll
+        document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        alert('הטופס נשלח בהצלחה!');
+        event.target.reset();
+    }
+
+    // Show home section by default
+    document.addEventListener('DOMContentLoaded', function() {
+        showSection('home');
+        
+        // Add active class to current nav link based on URL hash
+        const hash = window.location.hash.slice(1) || 'home';
+        const activeLink = document.querySelector(`.nav a[href="#${hash}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    });
+    </script>
+</body>
+</html>
